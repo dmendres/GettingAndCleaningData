@@ -1,11 +1,6 @@
----
-title: "GCDREADME.rmd"
-author: "dmendres"
-date: "July 23, 2015"
-output: 
-  html_document:
-    keep_md: yes
----
+# GCDREADME.rmd
+dmendres  
+July 23, 2015  
 
 # Introduction to Getting and Cleaning Data course project repository.
 This repository contains R-Scripts used to run an analysis on the Human Activity Recognition data set published by Reyes-0rtiz, et al. (obtained from the following URL: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) and described in [1]
