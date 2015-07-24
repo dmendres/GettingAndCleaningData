@@ -1,0 +1,36 @@
+---
+title: "Codebook for Getting and Cleaning Data Course Project"
+author: "dmendres"
+date: "23 July, 2015"
+output:
+  html_document:
+    keep_md: yes
+---
+
+## Project Description
+This is the course project for the Coursera *Getting and Cleaning Data" course code "getdata-030". 
+The descriptive information for the study design, data collection, and the processing steps can be found in the GCDReadme.html, in this same repository.
+
+## Description of the variables in the "tidyActivitySubjectFeatureMean.txt" file
+The resulting "wide tidy" data file contains 180 summary observations of the means of the "mean" and "std" features of the original data set, corresponding to 6 activities X 30 subjects tested on all activities. It has two descriptive columns, Activity and SubjectCode. It has 86 other columns containing summary (mean), by activity and subject, of the data extracted from the merged raw data sets. These data are named with user-friendly names such as "Mean of X component of Acceleration of Subject Body", "Standard Deviation of Vector Magnitude of Acceleration of Subject Body, or "Angle between Z orientation of device and the mean direction of Gravity". I note that when read.table loads this file, it converts the spaces in the column names to ".", but the actual tidy data file contains spaces in the header column names.
+
+### Activity is the activity corresponding to the observed data.
+It is a factor with 6 levels: LAYING < SITTING < STANDING < WALKING < WALKING DOWNSTAIRS < WALKING UPSTAIRS
+
+### SubjectCode is the code of the subject performing the activity.
+There are 30 subjects in the study data set. The data was randomly partitioned into training and test sets by subject, but I have combined these partitions for the current study.
+
+### Numeric Features
+The remaining features are named according to mean or standard deviation, domain (time, frequency), measurement, what object, what spatial component (if any) or vector magnitude the feature represents. Additionally, we distinguishes some special cases: mean frequency, angle of two directions.
+
+All remaining variables are numeric, and due to normalization (to the range -1.0 to 1.0) applied to the raw data set, they are essentially unitless.
+
+```{r}
+library(data.table)
+checkTidy <- data.table(read.table("data/UCI HAR Dataset/tidyActivitySubjectFeatureMean.txt", header = T))
+colnames(checkTidy)[3:length(colnames(checkTidy))]
+```
+
+##Sources
+Sources for this analysis, in addition to the raw data X, Y and S files, are the activity_labels.txt and features.txt files in the data set.
+
