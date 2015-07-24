@@ -27,10 +27,11 @@ All remaining variables are numeric, and due to normalization (to the range -1.0
 
 ```{r}
 library(data.table)
-checkTidy <- data.table(read.table("data/UCI HAR Dataset/tidyActivitySubjectFeatureMean.txt", header = T))
+checkTidy <- data.table(read.table("tidyActivitySubjectFeatureMean.txt", header = T))
 colnames(checkTidy)[3:length(colnames(checkTidy))]
+summary(checkTidy)
 ```
 
 ##Sources
-Sources for this analysis, in addition to the raw data X, Y and S files, are the activity_labels.txt and features.txt files in the data set.
+Sources for this analysis in addition to the raw data X, Y and S files, are the activity_labels.txt and features.txt files in the data set. The scripts to perform the analysis are the .R files in the repository.
 
