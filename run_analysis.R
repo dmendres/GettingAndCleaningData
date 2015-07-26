@@ -87,7 +87,7 @@ dtSYMeanStd[,Activity := activityFactor[ActivityCode]]
 
 # Step 4: Label the data set with descriptive names
 ## we need some text processing here: prettyNames.R encapsulates the mappings
-setnames(dtSYMeanStd,colnames(dtSYMeanStd),sapply(colnames(dtSYMeanStd), prettyNames))
+setnames(dtSYMeanStd,colnames(dtSYMeanStd),make.names(sapply(colnames(dtSYMeanStd), prettyNames)))
 
 # order the columns so SubjectCode and Activity are the first two columns
 cnames <- colnames(dtSYMeanStd)
@@ -117,6 +117,8 @@ dtfeatureMeanByActivityAndSubject <- dtSYMeanStd[,lapply(.SD, mean), by = c("Act
 #ensure the data set is orderd by Activity first, then SubjectCode
 setorder(dtfeatureMeanByActivityAndSubject, Activity, SubjectCode)
 
+setnames(dtfeatureMeanByActivityAndSubject,colnames(dtfeatureMeanByActivityAndSubject),
+         make.names(sapply(colnames(dtfeatureMeanByActivityAndSubject), addSummaryMeanToVariableNames)))
 # drop ActivityCode
 dtfeatureMeanByActivityAndSubject[,ActivityCode := NULL]
 

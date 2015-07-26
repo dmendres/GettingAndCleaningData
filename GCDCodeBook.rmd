@@ -8,27 +8,122 @@ output:
 ---
 
 ## Project Description
-This is the course project for the Coursera *Getting and Cleaning Data" course code "getdata-030". 
-The descriptive information for the study design, data collection, and the processing steps can be found in the GCDReadme.html, in this same repository.
+This is the course project for the Coursera *Getting and Cleaning Data" course code "getdata-030". The original "raw" data is downloaded from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip. 
+The descriptive information for the study design, data collection, and the processing steps can be found in the GCDReadme.html, in this same repository. The original ("raw") data is described in the README.txt and feature_info.txt. The original feature names are listed, by column number, in features.txt. This descriptive information is included by reference in the current document.
 
 ## Description of the variables in the "tidyActivitySubjectFeatureMean.txt" file
-The resulting "wide tidy" data file contains 180 summary observations of the means of the "mean" and "std" features of the original data set, corresponding to 6 activities X 30 subjects tested on all activities. It has two descriptive columns, Activity and SubjectCode. It has 86 other columns containing summary (mean), by activity and subject, of the data extracted from the merged raw data sets. These data are named with user-friendly names such as "Mean of X component of Acceleration of Subject Body", "Standard Deviation of Vector Magnitude of Acceleration of Subject Body, or "Angle between Z orientation of device and the mean direction of Gravity". I note that when read.table loads this file, it converts the spaces in the column names to ".", but the actual tidy data file contains spaces in the header column names.
+The resulting "wide tidy" data file contains 180 summary observations of the means of the "mean" and "std" features of the original data set, corresponding to 6 activities X 30 subjects tested on all activities. It has two descriptive columns, Activity and SubjectCode. It has 86 other columns containing summary (mean), by activity and subject, of the data extracted from the merged raw data sets. These data are named with user-friendly (but valid) column names such as "SummaryMeanof.Mean.of.X.component.of.Acceleration.of.Subject.Body", "SummaryMeanof.Standard.Deviation.of.Vector.Magnitude.of.Acceleration.of.Subject.Body"", or "SummaryMeanof.Angle.between.Z.orientation.of.device.and.the.mean.direction.of.Gravity".
 
 ### Activity is the activity corresponding to the observed data.
-It is a factor with 6 levels: LAYING < SITTING < STANDING < WALKING < WALKING DOWNSTAIRS < WALKING UPSTAIRS
+It is a factor with 6 levels: LAYING < SITTING < STANDING < WALKING < WALKING DOWNSTAIRS < WALKING UPSTAIRS, representing the study activities.
 
 ### SubjectCode is the code of the subject performing the activity.
-There are 30 subjects in the study data set. The data was randomly partitioned into training and test sets by subject, but I have combined these partitions for the current study.
+There are 30 subjects in the study data set. The data was randomly partitioned into training and test sets by subject, but I have recombined these partitions for the current study.
 
 ### Numeric Features
-The remaining features are named according to mean or standard deviation, domain (time, frequency), measurement, what object, what spatial component (if any) or vector magnitude the feature represents. Additionally, we distinguishes some special cases: mean frequency, angle of two directions.
+All of the remaining variables constitute the output variables of the current study.
+
+The output of this project is a table of mean values, summarized by activity and subject, of the mean or standard deviation  columns (or other "mean-like" variables such as "freqMean" and "gravityMean") extracted from the raw data set. For clarity, we label these output variables with a prefix of "SummaryMean.of." in the tidy data variables.
+
+These numeric features are named according to mean or standard deviation, domain (time, frequency), measurement, what object, what spatial component (if any) or vector magnitude the feature represents. Additionally, we distinguishes some special cases: mean frequency, angle of two directions.
 
 All remaining variables are numeric, and due to normalization (to the range -1.0 to 1.0) applied to the raw data set, they are essentially unitless.
 
+#### Variable descriptive names
+
+Column Number  |  (User-friendly) Column Name  
+--------------  |----------------------------  
+3  |  SummaryMean.of.Mean.of.X.component.of.Acceleration.of.Subject.Body  
+4  |  SummaryMean.of.Mean.of.Y.component.of.Acceleration.of.Subject.Body  
+5  |  SummaryMean.of.Mean.of.Z.component.of.Acceleration.of.Subject.Body
+6  |  SummaryMean.of.Standard.Deviation.of.X.component.of.Acceleration.of.Subject.Body
+7  |  SummaryMean.of.Standard.Deviation.of.Y.component.of.Acceleration.of.Subject.Body
+8  |  SummaryMean.of.Standard.Deviation.of.Z.component.of.Acceleration.of.Subject.Body
+9  |  SummaryMean.of.Mean.of.X.component.of.Acceleration.of.Gravity
+10  |  SummaryMean.of.Mean.of.Y.component.of.Acceleration.of.Gravity
+11  |  SummaryMean.of.Mean.of.Z.component.of.Acceleration.of.Gravity
+12  |  SummaryMean.of.Standard.Deviation.of.X.component.of.Acceleration.of.Gravity
+13  |  SummaryMean.of.Standard.Deviation.of.Y.component.of.Acceleration.of.Gravity
+14  |  SummaryMean.of.Standard.Deviation.of.Z.component.of.Acceleration.of.Gravity
+15  |  SummaryMean.of.Mean.of.Jerk.X.component.of.Acceleration.of.Subject.Body
+16  |  SummaryMean.of.Mean.of.Jerk.Y.component.of.Acceleration.of.Subject.Body
+17  |  SummaryMean.of.Mean.of.Jerk.Z.component.of.Acceleration.of.Subject.Body
+18  |  SummaryMean.of.Standard.Deviation.of.Jerk.X.component.of.Acceleration.of.Subject.Body
+19  |  SummaryMean.of.Standard.Deviation.of.Jerk.Y.component.of.Acceleration.of.Subject.Body
+20  |  SummaryMean.of.Standard.Deviation.of.Jerk.Z.component.of.Acceleration.of.Subject.Body
+21  |  SummaryMean.of.Mean.of.X.component.of.Angular.velocity.of.Subject.Body
+22  |  SummaryMean.of.Mean.of.Y.component.of.Angular.velocity.of.Subject.Body
+23  |  SummaryMean.of.Mean.of.Z.component.of.Angular.velocity.of.Subject.Body
+24  |  SummaryMean.of.Standard.Deviation.of.X.component.of.Angular.velocity.of.Subject.Body
+25  |  SummaryMean.of.Standard.Deviation.of.Y.component.of.Angular.velocity.of.Subject.Body
+26  |  SummaryMean.of.Standard.Deviation.of.Z.component.of.Angular.velocity.of.Subject.Body
+27  |  SummaryMean.of.Mean.of.Jerk.X.component.of.Angular.velocity.of.Subject.Body
+28  |  SummaryMean.of.Mean.of.Jerk.Y.component.of.Angular.velocity.of.Subject.Body
+29  |  SummaryMean.of.Mean.of.Jerk.Z.component.of.Angular.velocity.of.Subject.Body
+30  |  SummaryMean.of.Standard.Deviation.of.Jerk.X.component.of.Angular.velocity.of.Subject.Body
+31  |  SummaryMean.of.Standard.Deviation.of.Jerk.Y.component.of.Angular.velocity.of.Subject.Body
+32  |  SummaryMean.of.Standard.Deviation.of.Jerk.Z.component.of.Angular.velocity.of.Subject.Body
+33  |  SummaryMean.of.Mean.of.Vector.Magnitude.of.Acceleration.of.Subject.Body
+34  |  SummaryMean.of.Standard.Deviation.of.Vector.Magnitude.of.Acceleration.of.Subject.Body
+35  |  SummaryMean.of.Mean.of.Vector.Magnitude.of.Acceleration.of.Gravity
+36  |  SummaryMean.of.Standard.Deviation.of.Vector.Magnitude.of.Acceleration.of.Gravity
+37  |  SummaryMean.of.Mean.of.Jerk.Vector.Magnitude.of.Acceleration.of.Subject.Body
+38  |  SummaryMean.of.Standard.Deviation.of.Jerk.Vector.Magnitude.of.Acceleration.of.Subject.Body
+39  |  SummaryMean.of.Mean.of.Vector.Magnitude.of.Angular.velocity.of.Subject.Body
+40  |  SummaryMean.of.Standard.Deviation.of.Vector.Magnitude.of.Angular.velocity.of.Subject.Body
+41  |  SummaryMean.of.Mean.of.Jerk.Vector.Magnitude.of.Angular.velocity.of.Subject.Body
+42  |  SummaryMean.of.Standard.Deviation.of.Jerk.Vector.Magnitude.of.Angular.velocity.of.Subject.Body
+43  |  SummaryMean.of.Mean.of.Fourier.transform.of.X.component.of.Acceleration.of.Subject.Body
+44  |  SummaryMean.of.Mean.of.Fourier.transform.of.Y.component.of.Acceleration.of.Subject.Body
+45  |  SummaryMean.of.Mean.of.Fourier.transform.of.Z.component.of.Acceleration.of.Subject.Body
+46  |  SummaryMean.of.Standard.Deviation.of.Fourier.transform.of.X.component.of.Acceleration.of.Subject.Body
+47  |  SummaryMean.of.Standard.Deviation.of.Fourier.transform.of.Y.component.of.Acceleration.of.Subject.Body
+48  |  SummaryMean.of.Standard.Deviation.of.Fourier.transform.of.Z.component.of.Acceleration.of.Subject.Body
+49  |  SummaryMean.of.Mean.Frequency.of.Fourier.transform.of.the.X.component.of.Acceleration.of.Subject.Body
+50  |  SummaryMean.of.Mean.Frequency.of.Fourier.transform.of.the.Y.component.of.Acceleration.of.Subject.Body
+51  |  SummaryMean.of.Mean.Frequency.of.Fourier.transform.of.the.Z.component.of.Acceleration.of.Subject.Body
+52  |  SummaryMean.of.Mean.of.Jerk.Fourier.transform.of.X.component.of.Acceleration.of.Subject.Body
+53  |  SummaryMean.of.Mean.of.Jerk.Fourier.transform.of.Y.component.of.Acceleration.of.Subject.Body
+54  |  SummaryMean.of.Mean.of.Jerk.Fourier.transform.of.Z.component.of.Acceleration.of.Subject.Body
+55  |  SummaryMean.of.Standard.Deviation.of.Jerk.Fourier.transform.of.X.component.of.Acceleration.of.Subject.Body
+56  |  SummaryMean.of.Standard.Deviation.of.Jerk.Fourier.transform.of.Y.component.of.Acceleration.of.Subject.Body
+57  |  SummaryMean.of.Standard.Deviation.of.Jerk.Fourier.transform.of.Z.component.of.Acceleration.of.Subject.Body
+58  |  SummaryMean.of.Mean.Frequency.of.Fourier.transform.of.the.Jerk.X.component.of.Acceleration.of.Subject.Body
+59  |  SummaryMean.of.Mean.Frequency.of.Fourier.transform.of.the.Jerk.Y.component.of.Acceleration.of.Subject.Body
+60  |  SummaryMean.of.Mean.Frequency.of.Fourier.transform.of.the.Jerk.Z.component.of.Acceleration.of.Subject.Body
+61  |  SummaryMean.of.Mean.of.Fourier.transform.of.X.component.of.Angular.velocity.of.Subject.Body
+62  |  SummaryMean.of.Mean.of.Fourier.transform.of.Y.component.of.Angular.velocity.of.Subject.Body
+63  |  SummaryMean.of.Mean.of.Fourier.transform.of.Z.component.of.Angular.velocity.of.Subject.Body
+64  |  SummaryMean.of.Standard.Deviation.of.Fourier.transform.of.X.component.of.Angular.velocity.of.Subject.Body
+65  |  SummaryMean.of.Standard.Deviation.of.Fourier.transform.of.Y.component.of.Angular.velocity.of.Subject.Body
+66  |  SummaryMean.of.Standard.Deviation.of.Fourier.transform.of.Z.component.of.Angular.velocity.of.Subject.Body
+67  |  SummaryMean.of.Mean.Frequency.of.Fourier.transform.of.the.X.component.of.Angular.velocity.of.Subject.Body
+68  |  SummaryMean.of.Mean.Frequency.of.Fourier.transform.of.the.Y.component.of.Angular.velocity.of.Subject.Body
+69  |  SummaryMean.of.Mean.Frequency.of.Fourier.transform.of.the.Z.component.of.Angular.velocity.of.Subject.Body
+70  |  SummaryMean.of.Mean.of.Fourier.transform.of.Acceleration.of.Subject.Body
+71  |  SummaryMean.of.Standard.Deviation.of.Fourier.transform.of.Acceleration.of.Subject.Body
+72  |  SummaryMean.of.Mean.Frequency.of.Fourier.transform.of.the.Vector.Magnitude.of.Acceleration.of.Subject.Body
+73  |  SummaryMean.of.Mean.of.Jerk.Fourier.transform.of.Acceleration.of.Subject.Body
+74  |  SummaryMean.of.Standard.Deviation.of.Jerk.Fourier.transform.of.Acceleration.of.Subject.Body
+75  |  SummaryMean.of.Mean.Frequency.of.Fourier.transform.of.the.Jerk.Vector.Magnitude.of.Acceleration.of.Subject.Body
+76  |  SummaryMean.of.Mean.of.Fourier.transform.of.Angular.velocity.of.Subject.Body
+77  |  SummaryMean.of.Standard.Deviation.of.Fourier.transform.of.Angular.velocity.of.Subject.Body
+78  |  SummaryMean.of.Mean.Frequency.of.Fourier.transform.of.the.Vector.Magnitude.of.Angular.velocity.of.Subject.Body
+79  |  SummaryMean.of.Mean.of.Jerk.Fourier.transform.of.Angular.velocity.of.Subject.Body
+80  |  SummaryMean.of.Standard.Deviation.of.Jerk.Fourier.transform.of.Angular.velocity.of.Subject.Body
+81  |  SummaryMean.of.Mean.Frequency.of.Fourier.transform.of.the.Jerk.Vector.Magnitude.of.Angular.velocity.of.Subject.Body
+82  |  SummaryMean.of.Angle.between.mean.direction.of.Acceleration.of.Subject.Body.and.the.mean.direction.of.Gravity
+83  |  SummaryMean.of.Angle.between.mean.Jerk.direction.of.Acceleration.of.Subject.Body.and.the.mean.direction.of.Gravity
+84  |  SummaryMean.of.Angle.between.mean.direction.of.Angular.velocity.of.Subject.Body.and.the.mean.direction.of.Gravity
+85  |  SummaryMean.of.Angle.between.mean.Jerk.direction.of.Angular.velocity.of.Subject.Body.and.the.mean.direction.of.Gravity
+86  |  SummaryMean.of.Angle.between.X.orientation.of.device.and.the.mean.direction.of.Gravity
+87  |  SummaryMean.of.Angle.between.Y.orientation.of.device.and.the.mean.direction.of.Gravity
+88  |  SummaryMean.of.Angle.between.Z.orientation.of.device.and.the.mean.direction.of.Gravity
+
+#### Summary of the study output
 ```{r}
 library(data.table)
-checkTidy <- data.table(read.table("tidyActivitySubjectFeatureMean.txt", header = T))
-colnames(checkTidy)[3:length(colnames(checkTidy))]
+checkTidy <- data.table(read.table("data/UCI HAR Dataset/tidyActivitySubjectFeatureMean.txt", header = T))
 summary(checkTidy)
 ```
 

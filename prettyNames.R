@@ -117,3 +117,15 @@ prettyNames <- function(uglyName) {
 #             "angle.tBodyGyroMean._gravityMean." ,    "angle.tBodyGyroJerkMean._gravityMean.",
 #              "angle.X._gravityMean." ,                "angle.Y._gravityMean."    ,            
 #             "angle.Z._gravityMean."), prettyNames)
+
+
+addSummaryMeanToVariableNames <- function(uglyName)
+{
+  if (uglyName == "SubjectCode" || uglyName == "ActivityCode" || uglyName == "Activity") {
+    prettyName <- uglyName
+  } else {
+    prettyName <- paste("SummaryMean.of.",uglyName,sep="")
+  }
+}
+#unit tests
+lapply(c("Activity", "SubjectCode", "ActivityCode", "X.component.of.Acceleration.of.Subject.Body", "Standard.Deviation.of.Jerk.Z.component.of.Angular.velocity.of.Subject.Body", "Mean.of.Vector.Magnitude.of.Acceleration.of.Subject.Body"), addSummaryMeanToVariableNames)
